@@ -11,7 +11,7 @@ namespace VagaJusta.Domain.Entities
     public class Turma : BaseEntity
     {
         public Guid EscolaId { get; private set; }
-        //public Escola? Escola { get; private set; }
+        public Escola? Escola { get; private set; }
         public SerieEnum Serie { get; private set; }
         public CategoriaSerieEnum CategoriaSerie { get; private set; }
         public int CapacidadeMaxima { get; private set; }

@@ -9,7 +9,6 @@ namespace VagaJusta.Domain.Interfaces.Repositories
 {
     public interface ITurmaRepository : IRepository<Turma>
     {
-        Task<IEnumerable<Turma>> ListarFilaEsperaAsync(Guid id, CancellationToken cancellationToken);
         Task AdicionarAsync(Turma turma, CancellationToken cancellationToken);
     }
 }

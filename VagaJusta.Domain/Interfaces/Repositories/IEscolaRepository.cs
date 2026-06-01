@@ -10,7 +10,7 @@ namespace VagaJusta.Domain.Interfaces.Repositories
 {
     public interface IEscolaRepository : IRepository<Escola>
     {
-        Task<IEnumerable<Escola>> ObterTodasAsync(int pagina = 1, int tamanhoPagina = 10, CancellationToken cancellationToken = default);
+        Task<IEnumerable<Escola>> ObterAsync(int pagina = 1, int tamanhoPagina = 10, CancellationToken cancellationToken = default);
         Task AdicionarAsync(Escola escola, CancellationToken cancellationToken);
     }
 }
