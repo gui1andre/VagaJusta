@@ -8,9 +8,9 @@ using VagaJusta.Application.Commands.Escolas;
 
 namespace VagaJusta.Application.Validators
 {
-    public class CriarEscolaValidator : AbstractValidator<CriarEscolaCommand>
+    public class CriarEscolaCommandValidator : AbstractValidator<Commands.Escolas.CriarEscolaCommand>
     {
-        public CriarEscolaValidator()
+        public CriarEscolaCommandValidator()
         {
             RuleFor(x => x.Nome)
                 .NotEmpty().WithMessage("Nome da escola é obrigatório.")

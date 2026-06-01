@@ -10,18 +10,18 @@ using VagaJusta.Domain.Enums;
 
 namespace VagaJusta.Application.Validators
 {
-    public class CriarTurmaValidator : AbstractValidator<CriarTurmaCommand>
+    public class CriarTurmaCommandValidator : AbstractValidator<Commands.Turmas.CriarTurmaCommand>
     {
-        public CriarTurmaValidator()
+        public CriarTurmaCommandValidator()
         {
             RuleFor(x => x.EscolaId)
                 .NotEmpty().WithMessage("Escola é obrigatória.");
 
             RuleFor(x => x.Serie)
-                .MustBeEnum<CriarTurmaCommand,SerieEnum>().WithMessage("Série inválida.");
+                .MustBeEnum<CriarTurmaCommand, SerieEnum>().WithMessage("Série inválida.");
 
             RuleFor(x => x.CategoriaSerie)
-                .MustBeEnum<CriarTurmaCommand,CategoriaSerieEnum>().WithMessage("Categoria da série inválida.");
+                .MustBeEnum<CriarTurmaCommand, CategoriaSerieEnum>().WithMessage("Categoria da série inválida.");
 
 
             RuleFor(x => x.CapacidadeMaxima)

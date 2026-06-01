@@ -8,9 +8,9 @@ using VagaJusta.Application.Queries.Escolas;
 
 namespace VagaJusta.Application.Validators
 {
-    public class ListarEscolasQueryValidator : AbstractValidator<ListarEscolaQuery>
+    public class ListarEscolaQueryValidator : AbstractValidator<ListarEscolaQuery>
     {
-        public ListarEscolasQueryValidator()
+        public ListarEscolaQueryValidator()
         {
             RuleFor(x => x.Pagina)
                 .GreaterThanOrEqualTo(1).WithMessage("Página deve ser maior ou igual a 1.");

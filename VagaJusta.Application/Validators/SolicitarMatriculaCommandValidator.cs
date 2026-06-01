@@ -8,9 +8,9 @@ using VagaJusta.Application.Commands.Matriculas;
 
 namespace VagaJusta.Application.Validators
 {
-    public class SolicitarMatriculaValidator : AbstractValidator<SolicitarMatriculaCommand>
+    public class SolicitarMatriculaCommandValidator : AbstractValidator<SolicitarMatriculaCommand>
     {
-        public SolicitarMatriculaValidator()
+        public SolicitarMatriculaCommandValidator()
         {
             RuleFor(x => x.NomeAluno)
             .NotEmpty().WithMessage("Nome do aluno é obrigatório.")
