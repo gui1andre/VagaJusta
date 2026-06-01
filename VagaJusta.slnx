@@ -1,4 +1,5 @@
 <Solution>
   <Project Path="VagaJusta.Domain/VagaJusta.Domain.csproj" />
+  <Project Path="VagaJusta.Infrastructure/VagaJusta.Infrastructure.csproj" Id="646e1152-13d9-434d-83e0-8afe1a706ba2" />
   <Project Path="VagaJusta.Tests/VagaJusta.Tests.csproj" />
 </Solution>
