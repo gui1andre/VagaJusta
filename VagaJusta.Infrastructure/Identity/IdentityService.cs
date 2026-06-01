@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using VagaJusta.Application.DTO;
+using VagaJusta.Application.DTO.Identity;
 using VagaJusta.Application.Interfaces;
 
 namespace VagaJusta.Infrastructure.Identity
