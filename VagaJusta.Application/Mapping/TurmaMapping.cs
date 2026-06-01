@@ -10,7 +10,7 @@ namespace VagaJusta.Application.Mapping
 {
     public static class TurmaMapping
     {
-        public static TurmaResponse ToResponse(Turma turma) =>
+        public static TurmaResponse ToResponse(this Turma turma) =>
             new TurmaResponse(turma.Id, nameof(turma.Serie), nameof(turma.CategoriaSerie), turma.CapacidadeMaxima, turma.QuantidadeAlunos, turma.IdadeMinima, turma.IdadeMaxima, turma.VagasDisponiveis);
     }
 }

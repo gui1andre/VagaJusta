@@ -6,7 +6,7 @@ using System.Text;
 using System.Threading.Tasks;
 using VagaJusta.Application.DTO.Responses;
 
-namespace VagaJusta.Application.Queries.Escola
+namespace VagaJusta.Application.Queries.Escolas
 {
     public record ObterEscolaPorIdQuery(Guid Id) : IRequest<EscolaResponse>
     {

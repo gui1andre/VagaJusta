@@ -8,7 +8,7 @@ using VagaJusta.Application.DTO.Responses;
 using VagaJusta.Application.Mapping;
 using VagaJusta.Domain.Interfaces.Repositories;
 
-namespace VagaJusta.Application.Queries.Escola
+namespace VagaJusta.Application.Queries.Escolas
 {
     public class ListarEscolaQueryHandler(IEscolaRepository respository) : IRequestHandler<ListarEscolaQuery, IEnumerable<EscolaResponse>>
     {

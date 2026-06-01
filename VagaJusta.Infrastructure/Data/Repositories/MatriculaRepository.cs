@@ -42,7 +42,7 @@ namespace VagaJusta.Infrastructure.Data.Repositories
         {
             return await _context.Matriculas
                 .Include(m => m.Aluno)
-                .Include(m => m.Turma).ThenInclude(x => x.Escola)
+                .Include(m => m.Turma).ThenInclude(x => x!.Escola)
                 .FirstOrDefaultAsync(m => m.Id == id, cancellationToken);
         }
     }
