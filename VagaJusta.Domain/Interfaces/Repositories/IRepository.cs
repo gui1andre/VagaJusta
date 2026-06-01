@@ -6,8 +6,8 @@ using System.Threading.Tasks;
 
 namespace VagaJusta.Domain.Interfaces.Repositories
 {
-    public interface IRepository
+    public interface IRepository<TEntity> where TEntity : class
     {
-        public Task<T?> ObterPorIdAsync<T>(Guid id, CancellationToken cancellationToken) where T : class;
+        public Task<TEntity?> ObterPorIdAsync(Guid id, CancellationToken cancellationToken);
     }
 }

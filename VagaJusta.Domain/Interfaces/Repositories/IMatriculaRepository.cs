@@ -7,7 +7,7 @@ using VagaJusta.Domain.Entities;
 
 namespace VagaJusta.Domain.Interfaces.Repositories
 {
-    public interface IMatriculaRepository : IRepository
+    public interface IMatriculaRepository : IRepository<Matricula>
     {
         Task<bool> AlunoTemMatriculaAtivaAsync(Guid id, CancellationToken cancellationToken);
         Task<IEnumerable<Matricula>> ListarFilaDeEsperaAsync(Guid turmaId, CancellationToken cancellationToken);
