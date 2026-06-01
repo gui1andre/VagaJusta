@@ -6,5 +6,5 @@ using System.Threading.Tasks;
 
 namespace VagaJusta.Application.DTO.Responses
 {
-    public record EscolaResponse(Guid Id, string Nome, string Endereco, IEnumerable<TurmaResponse> Turmas)
+    public record EscolaResponse(Guid Id, string Nome, string Endereco, IEnumerable<TurmaResponse> Turmas);
 }
