@@ -1,0 +1,31 @@
+﻿using FluentValidation;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+using VagaJusta.Application.Commands.Matriculas;
+
+namespace VagaJusta.Application.Validators
+{
+    public class SolicitarMatriculaValidator : AbstractValidator<SolicitarMatriculaCommand>
+    {
+        public SolicitarMatriculaValidator()
+        {
+            RuleFor(x => x.NomeAluno)
+            .NotEmpty().WithMessage("Nome do aluno é obrigatório.")
+            .MaximumLength(150).WithMessage("Nome deve ter no máximo 150 caracteres.");
+
+            RuleFor(x => x.CPFAluno)
+                .NotEmpty().WithMessage("CPF do aluno é obrigatório.")
+                .Matches(@"^\d{3}\.?\d{3}\.?\d{3}-?\d{2}$").WithMessage("CPF inválido.");
+
+            RuleFor(x => x.DataNascimento)
+                .NotEmpty().WithMessage("Data de nascimento é obrigatória.")
+                .LessThan(DateTime.Today).WithMessage("Data de nascimento deve ser no passado.");
+
+            RuleFor(x => x.TurmaId)
+                .NotEmpty().WithMessage("Turma é obrigatória.");
+        }
+    }
+}
