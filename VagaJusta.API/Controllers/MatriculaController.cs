@@ -14,10 +14,10 @@ namespace VagaJusta.API.Controllers
         private readonly IMediator _mediator = mediator;
 
 
-        [HttpGet("{id:guid}/fila")]
-        public async Task<IActionResult> ObterDeFilaEspera(Guid id, CancellationToken cancellationToken)
+        [HttpGet("{turmaId:guid}/fila")]
+        public async Task<IActionResult> ObterDeFilaEspera(Guid turmaId, CancellationToken cancellationToken)
         {
-            var result = await _mediator.Send(new ObterFilaDeEsperaQuery(id), cancellationToken);
+            var result = await _mediator.Send(new ObterFilaDeEsperaQuery(turmaId), cancellationToken);
             return Ok(result);
         }
 

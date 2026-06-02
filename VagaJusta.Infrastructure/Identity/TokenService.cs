@@ -27,7 +27,7 @@ namespace VagaJusta.Infrastructure.Identity
                 {
                     new Claim(ClaimTypes.NameIdentifier, userId),
                 }),
-                Expires = DateTime.UtcNow.AddMinutes(30),
+                Expires = DateTime.UtcNow.AddDays(1),
                 SigningCredentials = credentials,
                 Issuer = _configuration["Jwt:Issuer"],
                 Audience = _configuration["Jwt:Audience"]

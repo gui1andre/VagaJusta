@@ -20,10 +20,10 @@ namespace VagaJusta.API.Controllers
             return Ok(result);
         }
 
-        [HttpGet("{id:guid}")]
-        public async Task<IActionResult> ObterPorId(Guid id, CancellationToken cancellationToken)
+        [HttpGet("{escolaId:guid}")]
+        public async Task<IActionResult> ObterPorId(Guid escolaId, CancellationToken cancellationToken)
         {
-            var result = await _mediator.Send(new ObterEscolaPorIdQuery(id), cancellationToken);
+            var result = await _mediator.Send(new ObterEscolaPorIdQuery(escolaId), cancellationToken);
             return Ok(result);
         }
 
