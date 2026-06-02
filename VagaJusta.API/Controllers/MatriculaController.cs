@@ -1,4 +1,5 @@
 ﻿using MediatR;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using VagaJusta.Application.Commands.Matriculas;
 using VagaJusta.Application.Queries.Matriculas;
@@ -7,6 +8,7 @@ namespace VagaJusta.API.Controllers
 {
     [ApiController]
     [Route("api/[controller]")]
+    [Authorize]
     public class MatriculaController(IMediator mediator) : ControllerBase
     {
         private readonly IMediator _mediator = mediator;

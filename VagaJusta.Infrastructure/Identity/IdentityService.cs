@@ -11,8 +11,8 @@ namespace VagaJusta.Infrastructure.Identity
 {
     public class IdentityService(UserManager<UsuarioIdentity> userManager) : IIdentityService
     {
-        private readonly UserManager<UsuarioIdentity> _userManager;
-        public async Task<IdentityUserDto> ObterPorEmailAsync(string email, CancellationToken cancellationToken)
+        private readonly UserManager<UsuarioIdentity> _userManager = userManager;
+        public async Task<IdentityUserDto?> ObterPorEmailAsync(string email)
         {
             var usuario = await _userManager.FindByEmailAsync(email);
 
@@ -22,7 +22,7 @@ namespace VagaJusta.Infrastructure.Identity
             return new IdentityUserDto(usuario.Id, usuario.Email, usuario.Nome, usuario.Ativo);
         }
 
-        public async Task<bool> ValidarSenhaAsync(string userId, string senha, CancellationToken cancellationToken)
+        public async Task<bool> ValidarSenhaAsync(string userId, string senha)
         {
             var usuario = await _userManager.FindByIdAsync(userId);
 

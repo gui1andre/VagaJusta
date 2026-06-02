@@ -9,7 +9,7 @@ namespace VagaJusta.Application.Interfaces
 {
     public interface IIdentityService
     {
-        Task<IdentityUserDto> ObterPorEmailAsync(string email, CancellationToken cancellationToken);
-        Task<bool> ValidarSenhaAsync(string userId, string senha, CancellationToken cancellationToken);
+        Task<IdentityUserDto?> ObterPorEmailAsync(string email);
+        Task<bool> ValidarSenhaAsync(string userId, string senha);
     }
 }

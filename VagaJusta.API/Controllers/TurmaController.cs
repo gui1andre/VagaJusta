@@ -1,4 +1,5 @@
 ﻿using MediatR;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using VagaJusta.Application.Commands.Turmas;
 
@@ -6,6 +7,7 @@ namespace VagaJusta.API.Controllers
 {
     [ApiController]
     [Route("api/[controller]")]
+    [Authorize]
     public class TurmaController(IMediator mediator) : ControllerBase
     {
         private readonly IMediator _mediator = mediator;
