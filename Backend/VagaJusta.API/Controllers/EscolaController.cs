@@ -34,6 +34,13 @@ namespace VagaJusta.API.Controllers
             return CreatedAtAction(nameof(ObterPorId), new { escolaId = result.Id }, result);
         }
 
+        [HttpPut]
+        public async Task<IActionResult> Atualizar(AtualizarEscolaCommand request, CancellationToken cancellationToken)
+        {
+            var result = await _mediator.Send(request, cancellationToken);
+            return Ok(result);
+        }
+
         [HttpDelete("{escolaId:guid}")]
         public async Task<IActionResult> Remover(Guid escolaId, CancellationToken cancellationToken)
         {

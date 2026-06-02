@@ -32,6 +32,17 @@ namespace VagaJusta.Domain.Entities
             };
         }
 
+        public void Atualizar(string nome, string endereco)
+        {
+            if (string.IsNullOrWhiteSpace(nome))
+                throw new DomainException("Nome da escola é obrigatório.");
+            if (string.IsNullOrWhiteSpace(endereco))
+                throw new DomainException("Endereço da escola é obrigatório.");
+
+            Nome = nome.Trim();
+            Endereco = endereco.Trim();
+        }
+
         public void AdicionarTurma(Turma turma)
         {
             if (_turmas.Any(t => t.Serie == turma.Serie && t.CategoriaSerie == turma.CategoriaSerie))
