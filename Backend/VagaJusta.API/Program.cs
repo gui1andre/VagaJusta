@@ -1,7 +1,9 @@
+using Microsoft.EntityFrameworkCore;
 using Microsoft.OpenApi.Models;
 using VagaJusta.API.MiddleWare;
 using VagaJusta.Application;
 using VagaJusta.Infrastructure;
+using VagaJusta.Infrastructure.Data;
 using VagaJusta.Infrastructure.Seed;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -50,6 +52,8 @@ var app = builder.Build();
 using(var scope = app.Services.CreateScope())
 {
     var services = scope.ServiceProvider;
+    var context = services.GetRequiredService<DBContext>();
+    await context.Database.MigrateAsync();
     var seeder = services.GetRequiredService<DatabaseSeeder>();
     await seeder.SeedAsync();
 }
@@ -62,7 +66,6 @@ if (app.Environment.IsDevelopment())
 }
 
 app.UseMiddleware<ExceptionMiddleware>();
-app.UseHttpsRedirection();
 
 app.UseAuthentication();
 app.UseAuthorization();
