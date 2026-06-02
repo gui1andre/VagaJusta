@@ -16,7 +16,6 @@ namespace VagaJusta.Infrastructure.Data.Repositories
         public async Task AdicionarAsync(Escola escola, CancellationToken cancellationToken)
         {
             await _context.Escolas.AddAsync(escola, cancellationToken);
-            await _context.SaveChangesAsync(cancellationToken);
         }
 
         public Task<Escola?> ObterPorIdAsync(Guid id, CancellationToken cancellationToken)
@@ -34,10 +33,9 @@ namespace VagaJusta.Infrastructure.Data.Repositories
                 .ToListAsync(cancellationToken);
         }
 
-        public async Task RemoverAsync(Escola entity, CancellationToken cancellationToken)
+        public void RemoverAsync(Escola entity, CancellationToken cancellationToken)
         {
             _context.Escolas.Remove(entity);
-            await _context.SaveChangesAsync(cancellationToken);
         }
     }
 }

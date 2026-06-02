@@ -9,6 +9,6 @@ namespace VagaJusta.Domain.Interfaces.Repositories
     public interface IRepository<TEntity> where TEntity : class
     {
         public Task<TEntity?> ObterPorIdAsync(Guid id, CancellationToken cancellationToken);
-        public Task RemoverAsync(TEntity entity, CancellationToken cancellationToken);
+        public void RemoverAsync(TEntity entity, CancellationToken cancellationToken);
     }
 }

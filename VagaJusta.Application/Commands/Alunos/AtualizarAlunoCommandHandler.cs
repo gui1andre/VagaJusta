@@ -11,9 +11,11 @@ using VagaJusta.Domain.Interfaces.Repositories;
 
 namespace VagaJusta.Application.Commands.Alunos
 {
-    public record AtualizarAlunoCommandHandler(IAlunoRepository alunoRepository) : IRequestHandler<AtualizarAlunoCommand, AlunoResponse>
+    public record AtualizarAlunoCommandHandler(IAlunoRepository alunoRepository, IUnitOfWork unitOfWork) : IRequestHandler<AtualizarAlunoCommand, AlunoResponse>
     {
         private readonly IAlunoRepository _alunoRepository = alunoRepository;
+        private readonly IUnitOfWork _unitOfWork = unitOfWork;
+
         public async Task<AlunoResponse> Handle(AtualizarAlunoCommand request, CancellationToken cancellationToken)
         {
             var aluno = await _alunoRepository.ObterPorIdAsync(request.Id, cancellationToken);
@@ -22,7 +24,7 @@ namespace VagaJusta.Application.Commands.Alunos
                 throw new NotFoundException("Aluno não encontrado.");
 
             aluno.Atualizar(request.Nome, request.DataNascimento);
-            await _alunoRepository.AtualizarAlunoAsync(cancellationToken);
+            await _unitOfWork.CommitAsync(cancellationToken);
 
             return aluno.ToResponse();
         }

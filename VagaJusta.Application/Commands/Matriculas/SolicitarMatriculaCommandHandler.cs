@@ -14,17 +14,18 @@ using VagaJusta.Domain.ValueObjects;
 
 namespace VagaJusta.Application.Commands.Matriculas
 {
-    public class SolicitarMatriculaCommandHandler(IAlunoRepository alunoRepository, ITurmaRepository turmaRepository, IMatriculaRepository matriculaRepository) : IRequestHandler<SolicitarMatriculaCommand, MatriculaResponse>
+    public class SolicitarMatriculaCommandHandler(IAlunoRepository alunoRepository, ITurmaRepository turmaRepository, IMatriculaRepository matriculaRepository, IUnitOfWork unitOfWork) : IRequestHandler<SolicitarMatriculaCommand, MatriculaResponse>
     {
         private readonly IAlunoRepository _alunoRepository = alunoRepository;
         private readonly ITurmaRepository _turmaRepository = turmaRepository;
         private readonly IMatriculaRepository _matriculaRepository = matriculaRepository;
+        private readonly IUnitOfWork _unitOfWork = unitOfWork;
 
         public async Task<MatriculaResponse> Handle(SolicitarMatriculaCommand request, CancellationToken cancellationToken)
         {
             var turma = await _turmaRepository.ObterPorIdAsync(request.TurmaId, cancellationToken);
 
-            if(turma is null)
+            if (turma is null)
                 throw new NotFoundException("Turma não encontrada.");
 
             var aluno = await _alunoRepository.ObterPorCPFAsync(new CPF(request.CPFAluno), cancellationToken);
@@ -37,14 +38,14 @@ namespace VagaJusta.Application.Commands.Matriculas
                 await _alunoRepository.AdicionarAlunoAsync(aluno, cancellationToken);
             }
 
-            if(alunoJaExiste)
+            if (alunoJaExiste)
             {
                 var jaMatriculado = await _matriculaRepository.AlunoTemMatriculaAtivaAsync(aluno!.Id, cancellationToken);
                 if (jaMatriculado)
                     throw new DomainException("Aluno já possui matrícula nessa turma.");
             }
 
-            if(!turma.IdadeAlunoCompativel(aluno!.Idade))
+            if (!turma.IdadeAlunoCompativel(aluno!.Idade))
                 throw new DomainException("Idade do aluno não é compatível com a turma.");
 
             var matricula = Matricula.Criar(aluno.Id, turma.Id);
@@ -57,10 +58,10 @@ namespace VagaJusta.Application.Commands.Matriculas
             else
                 matricula.ColocarEmEspera();
 
-            await _matriculaRepository.AdicionarASync(matricula, cancellationToken);
+            await _matriculaRepository.AdicionarAsync(matricula, cancellationToken);
+            await _unitOfWork.CommitAsync(cancellationToken);
 
             return matricula.ToResponse();
-
         }
     }
 }

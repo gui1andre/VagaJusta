@@ -6,11 +6,12 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using VagaJusta.Domain.Entities;
+using VagaJusta.Domain.Interfaces.Repositories;
 using VagaJusta.Infrastructure.Identity;
 
 namespace VagaJusta.Infrastructure.Data
 {
-    public class DBContext : IdentityDbContext<UsuarioIdentity>
+    public class DBContext : IdentityDbContext<UsuarioIdentity>, IUnitOfWork
     {
         public DBContext(DbContextOptions<DBContext> options) : base(options) { }
 
@@ -43,5 +44,7 @@ namespace VagaJusta.Infrastructure.Data
 
             return base.SaveChangesAsync(cancellationToken);
         }
+
+        public async Task<int> CommitAsync(CancellationToken cancellationToken = default) => await SaveChangesAsync(cancellationToken);
     }
 }

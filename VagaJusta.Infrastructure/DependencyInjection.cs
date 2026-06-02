@@ -59,6 +59,7 @@ namespace VagaJusta.Infrastructure
             services.AddScoped<IMatriculaRepository, MatriculaRepository>();
             services.AddScoped<IIdentityService, IdentityService>();
             services.AddScoped<ITokenService, TokenService>();
+            services.AddScoped<IUnitOfWork>(sp => sp.GetRequiredService<DBContext>());
 
             return services;
         }

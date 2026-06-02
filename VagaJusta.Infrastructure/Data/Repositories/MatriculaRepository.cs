@@ -14,10 +14,9 @@ namespace VagaJusta.Infrastructure.Data.Repositories
     {
         private readonly DBContext _context = context;
 
-        public async Task AdicionarASync(Matricula matricula, CancellationToken cancellationToken)
+        public async Task AdicionarAsync(Matricula matricula, CancellationToken cancellationToken)
         {
             await _context.Matriculas.AddAsync(matricula, cancellationToken);
-            await _context.SaveChangesAsync(cancellationToken);
         }
 
         public async Task<bool> AlunoTemMatriculaAtivaAsync(Guid id, CancellationToken cancellationToken)
@@ -46,10 +45,9 @@ namespace VagaJusta.Infrastructure.Data.Repositories
                 .FirstOrDefaultAsync(m => m.Id == id, cancellationToken);
         }
 
-        public async Task RemoverAsync(Matricula entity, CancellationToken cancellationToken)
+        public void RemoverAsync(Matricula entity, CancellationToken cancellationToken)
         {
             _context.Remove(entity);
-            await _context.SaveChangesAsync(cancellationToken);
         }
 
         public async Task<bool> TurmaTemMatriculaAtivaAsync(Guid turmaId, CancellationToken cancellationToken)

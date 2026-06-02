@@ -12,6 +12,5 @@ namespace VagaJusta.Domain.Interfaces.Repositories
     {
         Task<Aluno?> ObterPorCPFAsync(CPF cpf, CancellationToken cancellationToken);
         Task AdicionarAlunoAsync(Aluno aluno, CancellationToken cancellationToken);
-        Task AtualizarAlunoAsync(CancellationToken cancellationToken);
     }
 }

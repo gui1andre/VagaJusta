@@ -11,7 +11,7 @@ namespace VagaJusta.Domain.Interfaces.Repositories
     {
         Task<bool> AlunoTemMatriculaAtivaAsync(Guid id, CancellationToken cancellationToken);
         Task<IEnumerable<Matricula>> ListarFilaDeEsperaAsync(Guid turmaId, CancellationToken cancellationToken);
-        Task AdicionarASync(Matricula matricula, CancellationToken cancellationToken);
+        Task AdicionarAsync(Matricula matricula, CancellationToken cancellationToken);
         Task<bool> TurmaTemMatriculaAtivaAsync(Guid turmaId, CancellationToken cancellationToken);
         Task<bool> EscolaTemMatriculaAtivaAsync(Guid escolaId, CancellationToken cancellationToken);
         Task<IEnumerable<Matricula>> ListarMatriculasPorTurmaAsync(Guid turmaId, CancellationToken cancellationToken);

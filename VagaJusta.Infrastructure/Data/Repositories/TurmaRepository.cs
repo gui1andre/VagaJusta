@@ -17,7 +17,6 @@ namespace VagaJusta.Infrastructure.Data.Repositories
         public async Task AdicionarAsync(Turma turma, CancellationToken cancellationToken)
         {
             await _context.Turma.AddAsync(turma);
-            await _context.SaveChangesAsync(cancellationToken);
         }
 
         public async Task<Turma?> ObterPorIdAsync(Guid id, CancellationToken cancellationToken)
@@ -25,10 +24,9 @@ namespace VagaJusta.Infrastructure.Data.Repositories
             return await _context.Turma.FirstOrDefaultAsync(t => t.Id == id, cancellationToken);
         }
 
-        public async Task RemoverAsync(Turma entity, CancellationToken cancellationToken)
+        public void RemoverAsync(Turma entity, CancellationToken cancellationToken)
         {
             _context.Remove(entity);
-            await _context.SaveChangesAsync(cancellationToken);
         }
 
         public async Task<bool> VerificarTurmaJaExistenteAsync(Guid escolaId,SerieEnum serie, CategoriaSerieEnum categoriaSerieEnum, CancellationToken cancellationToken)

@@ -13,10 +13,11 @@ using VagaJusta.Domain.Interfaces.Repositories;
 
 namespace VagaJusta.Application.Commands.Turmas
 {
-    public class CriarTurmaCommandHandler(IEscolaRepository escolaRepository, ITurmaRepository turmaRepository) : IRequestHandler<CriarTurmaCommand, TurmaResponse>
+    public class CriarTurmaCommandHandler(IEscolaRepository escolaRepository, ITurmaRepository turmaRepository, IUnitOfWork unitOfWork) : IRequestHandler<CriarTurmaCommand, TurmaResponse>
     {
         private readonly ITurmaRepository _turmaRepository = turmaRepository;
         private readonly IEscolaRepository _escolaRepository = escolaRepository;
+        private readonly IUnitOfWork _unitOfWork = unitOfWork;
 
         public async Task<TurmaResponse> Handle(CriarTurmaCommand request, CancellationToken cancellationToken)
         {
@@ -30,19 +31,19 @@ namespace VagaJusta.Application.Commands.Turmas
 
             var turmaExistente = await _turmaRepository.VerificarTurmaJaExistenteAsync(escola.Id, serie, categoriaSerie, cancellationToken);
 
-            if(turmaExistente)
+            if (turmaExistente)
                 throw new InvalidOperationException("Já existe uma turma com a mesma série e categoria para esta escola.");
 
             var turma = Turma.Criar(
-                escola.Id, 
+                escola.Id,
                 serie,
                 categoriaSerie,
                 request.CapacidadeMaxima,
-                request.IdadeMinima, 
+                request.IdadeMinima,
                 request.IdadeMaxima);
 
-
             await _turmaRepository.AdicionarAsync(turma, cancellationToken);
+            await _unitOfWork.CommitAsync(cancellationToken);
 
             return turma.ToResponse();
         }
