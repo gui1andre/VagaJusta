@@ -1,4 +1,5 @@
-﻿using MediatR;
+﻿using FluentValidation;
+using MediatR;
 using Microsoft.Extensions.DependencyInjection;
 using System;
 using System.Collections.Generic;
@@ -15,7 +16,7 @@ namespace VagaJusta.Application
         public static IServiceCollection AddApplication(this IServiceCollection services)
         {
 
-
+            services.AddValidatorsFromAssembly(typeof(DependencyInjection).Assembly);
 
             services.AddMediatR(cfg =>
                 {
