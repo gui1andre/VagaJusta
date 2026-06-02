@@ -12,10 +12,11 @@ namespace VagaJusta.Application.Mapping
     {
         public static MatriculaResponse ToResponse(this Matricula matricula) =>
             new MatriculaResponse(
-                matricula.Id, 
+                matricula.Id,
+                matricula.AlunoId,
                 matricula.Aluno?.Nome ?? string.Empty, 
                 matricula.Aluno?.CPF.Numero ?? string.Empty, 
-                $"{nameof(matricula.Turma.Serie)} {nameof(matricula.Turma.CategoriaSerie)}", 
+                $"{matricula.Turma.Serie.ToString()} {matricula.Turma.CategoriaSerie.ToString()}", 
                 matricula.Turma?.Escola?.Nome ?? string.Empty, 
                 nameof(matricula.Status), 
                 matricula.DataSolicitacao);

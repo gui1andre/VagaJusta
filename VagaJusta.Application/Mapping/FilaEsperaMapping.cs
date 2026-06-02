@@ -14,7 +14,7 @@ namespace VagaJusta.Application.Mapping
             new FilaEsperaResponse(
                 posicao,
                 matricula.Id,
-                matricula.Aluno?.Nome ?? string.Empty,
+                matricula.Aluno!.ToResponse(),
                 matricula.DataSolicitacao);
     }
 }

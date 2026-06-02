@@ -39,5 +39,14 @@ namespace VagaJusta.Domain.Entities
             return idade;
         }
 
+        public void Atualizar(string nome, DateTime dataNascimento) 
+        {
+            if(string.IsNullOrWhiteSpace(nome))
+                throw new DomainException("O nome do aluno é obrigatório.");
+
+            Nome = nome;
+            DataNascimento = dataNascimento;
+        }
+
     }
 }

@@ -22,8 +22,8 @@ namespace VagaJusta.Infrastructure.Data.Repositories
 
         public async Task<bool> AlunoTemMatriculaAtivaAsync(Guid id, CancellationToken cancellationToken)
         {
-            return await _context.Matriculas.AnyAsync(x => 
-            x.AlunoId == id && 
+            return await _context.Matriculas.AnyAsync(x =>
+            x.AlunoId == id &&
             x.Status != StatusMatriculaEnum.Cancelada &&
             x.Status != StatusMatriculaEnum.Rejeitada,
             cancellationToken);
@@ -44,6 +44,42 @@ namespace VagaJusta.Infrastructure.Data.Repositories
                 .Include(m => m.Aluno)
                 .Include(m => m.Turma).ThenInclude(x => x!.Escola)
                 .FirstOrDefaultAsync(m => m.Id == id, cancellationToken);
+        }
+
+        public async Task RemoverAsync(Matricula entity, CancellationToken cancellationToken)
+        {
+            _context.Remove(entity);
+            await _context.SaveChangesAsync(cancellationToken);
+        }
+
+        public async Task<bool> TurmaTemMatriculaAtivaAsync(Guid turmaId, CancellationToken cancellationToken)
+        {
+            return await _context.Matriculas.AnyAsync(x =>
+            x.TurmaId == turmaId &&
+            x.Status != StatusMatriculaEnum.Cancelada &&
+            x.Status != StatusMatriculaEnum.Rejeitada, cancellationToken
+            );
+        }
+
+        public async Task<bool> EscolaTemMatriculaAtivaAsync(Guid escolaId, CancellationToken cancellationToken)
+        {
+            return await _context.Matriculas
+               .Include(m => m.Turma)
+               .AnyAsync(m =>
+                   m.Turma!.EscolaId == escolaId &&
+                   m.Status != StatusMatriculaEnum.Cancelada &&
+                   m.Status != StatusMatriculaEnum.Rejeitada, cancellationToken
+                   );
+        }
+
+        public async Task<IEnumerable<Matricula>> ListarMatriculasPorTurmaAsync(Guid turmaId, CancellationToken cancellationToken)
+        {
+           return await _context.Matriculas
+                .Include(m => m.Aluno)
+                .Where(m => m.TurmaId == turmaId)
+                .AsNoTracking()
+                .OrderBy(x => x.DataSolicitacao)
+                .ToListAsync(cancellationToken);
         }
     }
 }

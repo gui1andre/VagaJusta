@@ -33,5 +33,11 @@ namespace VagaJusta.Infrastructure.Data.Repositories
                 .AsNoTracking()
                 .ToListAsync(cancellationToken);
         }
+
+        public async Task RemoverAsync(Escola entity, CancellationToken cancellationToken)
+        {
+            _context.Escolas.Remove(entity);
+            await _context.SaveChangesAsync(cancellationToken);
+        }
     }
 }

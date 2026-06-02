@@ -19,6 +19,11 @@ namespace VagaJusta.Infrastructure.Data.Repositories
             await _context.SaveChangesAsync(cancellationToken);
         }
 
+        public async Task AtualizarAlunoAsync(CancellationToken cancellationToken)
+        {
+            await _context.SaveChangesAsync(cancellationToken);
+        }
+
         public async Task<Aluno?> ObterPorCPFAsync(CPF cpf, CancellationToken cancellationToken)
         {
             return await _context.Alunos.FirstOrDefaultAsync(x => x.CPF.Numero == cpf.Numero, cancellationToken);
@@ -27,6 +32,12 @@ namespace VagaJusta.Infrastructure.Data.Repositories
         public async Task<Aluno?> ObterPorIdAsync(Guid id, CancellationToken cancellationToken)
         {
             return await _context.Alunos.FirstOrDefaultAsync(x => x.Id == id, cancellationToken);
+        }
+
+        public async Task RemoverAsync(Aluno entity, CancellationToken cancellationToken)
+        {
+            _context.Alunos.Remove(entity);
+            await _context.SaveChangesAsync(cancellationToken);
         }
     }
 }

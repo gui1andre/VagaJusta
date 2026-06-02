@@ -34,5 +34,12 @@ namespace VagaJusta.API.Controllers
             return CreatedAtAction(nameof(ObterPorId), new { id = result.Id }, result);
         }
 
+        [HttpDelete("{escolaId:guid}")]
+        public async Task<IActionResult> Remover(Guid escolaId, CancellationToken cancellationToken)
+        {
+            await _mediator.Send(new DeletarEscolaCommand(escolaId), cancellationToken);
+            return NoContent();
+        }
+
     }
 }

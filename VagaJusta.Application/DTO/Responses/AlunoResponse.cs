@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace VagaJusta.Application.DTO.Responses
 {
-    public record FilaEsperaResponse(int Posicao, Guid MatriculaId, AlunoResponse Aluno, DateTime DataSolicitacao)
+    public record AlunoResponse(Guid Id, string Nome, string CPF, DateTime DataNascimento, int Idade)
     {
     }
 }
