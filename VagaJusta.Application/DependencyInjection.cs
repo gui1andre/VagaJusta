@@ -14,11 +14,16 @@ namespace VagaJusta.Application
 
         public static IServiceCollection AddApplication(this IServiceCollection services)
         {
-            return services.AddMediatR(cfg =>
+
+
+
+            services.AddMediatR(cfg =>
                 {
                     cfg.RegisterServicesFromAssembly(typeof(DependencyInjection).Assembly);
                     cfg.AddBehavior(typeof(IPipelineBehavior<,>), typeof(ValidationBehaviour<,>));
                 });
+
+            return services;
         }
     }
 }

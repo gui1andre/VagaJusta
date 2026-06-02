@@ -18,7 +18,7 @@ namespace VagaJusta.Infrastructure.Identity
         public string GerarToken(string userId, string email)
         {
 
-            var key = Encoding.UTF8.GetBytes(_configuration["Jwt:Secret"]!);
+            var key = Encoding.UTF8.GetBytes(_configuration["Jwt:SecretKey"]!);
             var credentials = new SigningCredentials(new SymmetricSecurityKey(key), SecurityAlgorithms.HmacSha256Signature);
 
             var tokenDescriptor = new SecurityTokenDescriptor

@@ -12,7 +12,7 @@ namespace VagaJusta.Infrastructure.Data
 {
     public class DBContext : IdentityDbContext<UsuarioIdentity>
     {
-        public DBContext(DbContextOptions options) : base(options) { }
+        public DBContext(DbContextOptions<DBContext> options) : base(options) { }
 
         public DbSet<Escola> Escolas => Set<Escola>();
         public DbSet<Aluno> Alunos => Set<Aluno>();

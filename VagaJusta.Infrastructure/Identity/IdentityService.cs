@@ -19,7 +19,7 @@ namespace VagaJusta.Infrastructure.Identity
             if (usuario is null)
                 return null;
 
-            return new IdentityUserDto(usuario.Id, usuario.Email, usuario.Nome, usuario.Ativo);
+            return new IdentityUserDto(usuario.Id, usuario.Email!, usuario.Nome, usuario.Ativo);
         }
 
         public async Task<bool> ValidarSenhaAsync(string userId, string senha)

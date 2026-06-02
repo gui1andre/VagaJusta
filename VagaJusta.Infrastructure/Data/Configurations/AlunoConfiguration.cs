@@ -13,7 +13,7 @@ namespace VagaJusta.Infrastructure.Data.Configurations
     {
         public void Configure(EntityTypeBuilder<Aluno> builder)
         {
-            builder.ToTable("Alunos");
+            builder.ToTable("alunos");
             builder.HasKey(a => a.Id);
             builder.Property(a => a.Nome).HasMaxLength(200).IsRequired();
             builder.OwnsOne(a => a.CPF, cpf =>
