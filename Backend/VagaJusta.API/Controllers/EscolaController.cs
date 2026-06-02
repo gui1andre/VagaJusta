@@ -31,7 +31,7 @@ namespace VagaJusta.API.Controllers
         public async Task<IActionResult> Criar(CriarEscolaCommand request, CancellationToken cancellationToken)
         {
             var result = await _mediator.Send(request, cancellationToken);
-            return CreatedAtAction(nameof(ObterPorId), new { id = result.Id }, result);
+            return CreatedAtAction(nameof(ObterPorId), new { escolaId = result.Id }, result);
         }
 
         [HttpDelete("{escolaId:guid}")]

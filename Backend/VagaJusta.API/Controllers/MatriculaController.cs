@@ -26,7 +26,7 @@ namespace VagaJusta.API.Controllers
         public async Task<IActionResult> Solicitar(SolicitarMatriculaCommand request, CancellationToken cancellationToken)
         {
             var result = await _mediator.Send(request, cancellationToken);
-            return CreatedAtAction(nameof(ObterDeFilaEspera), new { id = result.Id }, result);
+            return CreatedAtAction(nameof(ObterDeFilaEspera), new { turmaId = request.TurmaId }, result);
         }
     }
 }

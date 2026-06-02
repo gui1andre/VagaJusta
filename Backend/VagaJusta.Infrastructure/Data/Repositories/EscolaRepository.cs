@@ -20,7 +20,7 @@ namespace VagaJusta.Infrastructure.Data.Repositories
 
         public Task<Escola?> ObterPorIdAsync(Guid id, CancellationToken cancellationToken)
         {
-            return _context.Escolas.FirstOrDefaultAsync(x  => x.Id == id, cancellationToken);
+            return _context.Escolas.Include(x => x.Turmas).FirstOrDefaultAsync(x  => x.Id == id, cancellationToken);
         }
 
         public async Task<IEnumerable<Escola>> ObterAsync(int pagina = 1, int tamanhoPagina = 10, CancellationToken cancellationToken = default)
