@@ -9,6 +9,7 @@ using VagaJusta.Application.Exceptions;
 using VagaJusta.Application.Mapping;
 using VagaJusta.Domain.Entities;
 using VagaJusta.Domain.Enums;
+using VagaJusta.Domain.Exceptions;
 using VagaJusta.Domain.Interfaces.Repositories;
 
 namespace VagaJusta.Application.Commands.Turmas
@@ -32,7 +33,7 @@ namespace VagaJusta.Application.Commands.Turmas
             var turmaExistente = await _turmaRepository.VerificarTurmaJaExistenteAsync(escola.Id, serie, categoriaSerie, cancellationToken);
 
             if (turmaExistente)
-                throw new InvalidOperationException("Já existe uma turma com a mesma série e categoria para esta escola.");
+                throw new DomainException("Já existe uma turma com a mesma série e categoria para esta escola.");
 
             var turma = Turma.Criar(
                 escola.Id,
