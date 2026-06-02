@@ -18,7 +18,7 @@ namespace VagaJusta.Application.Mapping
                 matricula.Aluno?.CPF.Numero ?? string.Empty, 
                 $"{matricula.Turma.Serie.ToString()} {matricula.Turma.CategoriaSerie.ToString()}", 
                 matricula.Turma?.Escola?.Nome ?? string.Empty, 
-                nameof(matricula.Status), 
+                matricula.Status.ToString(), 
                 matricula.DataSolicitacao);
     }
 }
