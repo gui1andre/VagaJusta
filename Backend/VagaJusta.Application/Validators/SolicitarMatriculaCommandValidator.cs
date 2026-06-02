@@ -13,8 +13,9 @@ namespace VagaJusta.Application.Validators
         public SolicitarMatriculaCommandValidator()
         {
             RuleFor(x => x.NomeAluno)
-            .NotEmpty().WithMessage("Nome do aluno é obrigatório.")
-            .MaximumLength(150).WithMessage("Nome deve ter no máximo 150 caracteres.");
+                .NotEmpty().WithMessage("Nome do aluno é obrigatório.")
+                .MinimumLength(3).WithMessage("Nome deve ter pelo menos 3 caracteres.")
+                .MaximumLength(150).WithMessage("Nome deve ter no máximo 150 caracteres.");
 
             RuleFor(x => x.CPFAluno)
                 .NotEmpty().WithMessage("CPF do aluno é obrigatório.")
@@ -22,7 +23,7 @@ namespace VagaJusta.Application.Validators
 
             RuleFor(x => x.DataNascimento)
                 .NotEmpty().WithMessage("Data de nascimento é obrigatória.")
-                .LessThan(DateTime.Today).WithMessage("Data de nascimento deve ser no passado.");
+                .LessThan(DateTime.Today).WithMessage("Data de nascimento deve ser anterior à data de hoje.");
 
             RuleFor(x => x.TurmaId)
                 .NotEmpty().WithMessage("Turma é obrigatória.");
